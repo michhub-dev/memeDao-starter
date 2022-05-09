@@ -11,7 +11,7 @@ const App = () => {
   if(!address){
     return (
       <div className="landing">
-        <h1>Hi! Welcome to Meme Dao👋 </h1>
+        <h1>Hey memer! Welcome to Meme Dao👋 </h1>
         <button onClick={connectWithMetamask} className="btn-hero">Connect wallet</button>
       </div>
     );
@@ -19,7 +19,7 @@ const App = () => {
   //if the user's wallet is already connected 
   return (
     <div className="landing">
-      <h1>Hi!👋 Meme DAO👽</h1>
+      <h1>Hey!👋 Meme DAO👽</h1>
       <p>Wallet connected!</p>
     </div>
   );
