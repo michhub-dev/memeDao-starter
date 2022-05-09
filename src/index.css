@@ -116,7 +116,7 @@ h1 {
 
 button {
   cursor: pointer;
-  background-color: #000;
+  background-color: #42d4f5;
   color: #fff;
   border: none;
   font-weight: bold;
@@ -128,11 +128,12 @@ button {
 }
 
 button:hover {
-  background-color: #121212;
+  background-color: #74abb8;
+  transition: 0.7s;
 }
 
 button:focus {
-  background-color: #222;
+  background-color: #5b41ab;
 }
 
 button:disabled {
