@@ -21,14 +21,15 @@ const provider = new ethers.providers.JsonRpcProvider(ALCHEMY_API_URL);
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
 const sdk = new ThirdwebSDK(wallet);
 
+
 (async () => {
-    try{
-       const address = await sdk.getSigner().getAddress();
+    try {
+      const address = await sdk.getSigner().getAddress();
        console.log("sdk initialized by address..", address);
 
-    }catch(err) {
-        console.error("Failed to get account from sdk", err);
+    } catch (err) {
+        console.error("Failed to get apps from the sdk", err);
         process.exit(1);
-    }
+      }
 })();
 export default sdk;
