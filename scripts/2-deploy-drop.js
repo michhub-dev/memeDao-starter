@@ -19,6 +19,6 @@ import { readFileSync } from "fs";
         console.log("successfully deployed editionDrop contract, address:",EditionDropInfo,);
         console.log(" EditionDrop metadata", metadata);
     } catch(error) {
-        console("Failed to deploy editionDrop", error);
+        console.log("Failed to deploy editionDrop", error);
     }
 })();
