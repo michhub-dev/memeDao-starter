@@ -6,19 +6,19 @@ import dotenv from "dotenv";
 dotenv.config();
 
 /// ensure .env is working 
-if(!PRIVATE_KEY || PRIVATE_KEY ==="") {
+if(!process.env.PRIVATE_KEY || process.env.PRIVATE_KEY ==="") {
     console.log("Private key not found")
 }
-if(!WALLET_ADDRESS || WALLET_ADDRESS ==="") {
+if(!process.env.WALLET_ADDRESS || process.env.WALLET_ADDRESS ==="") {
     console.log("Wallet address not found")
 }
-if(!ALCHEMY_API_URL || ALCHEMY_API_URL ==="") {
+if(!process.env.ALCHEMY_API_URL || process.env.ALCHEMY_API_URL ==="") {
     console.log("Alchemy api key not found")
 }
 
 ///use ALCHEMY_API_URL from .env 
-const provider = new ethers.providers.JsonRpcProvider(ALCHEMY_API_URL);
-const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
+const provider = new ethers.providers.JsonRpcProvider(process.env.ALCHEMY_API_URL);
+const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 const sdk = new ThirdwebSDK(wallet);
 
 
