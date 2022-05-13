@@ -1,4 +1,5 @@
 import { useAddress, useMetamask } from '@thirdweb-dev/react';
+import { useState, useEffect } from "react";  
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       </div>
     );
   }
+ 
   //if the user's wallet is already connected 
   return (
     <div className="landing">
@@ -24,5 +26,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;

@@ -14,6 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThirdwebProvider desiredChainId={activeChainId}>
       <App />
+      
     </ThirdwebProvider>
   </React.StrictMode>,
   document.getElementById('root'),
