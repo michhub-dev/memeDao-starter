@@ -12,10 +12,31 @@ const App = () => {
   // state variable to know if user have our NFT 
   const [ userHasNFT, setUserHasNFT ] = useState(false); 
 
-  //if no connected wallet, exit
+  useEffect(() => {
+     //if no connected wallet, exit
   if(!address){
     return;
   }
+  
+
+const checkBalance = async () => {
+  try{
+    //check if the user has our NFT 
+    const balance = await editionDrop.balanceOf(address, 0);
+    if(balance.gt(0)){
+      setUserHasNFT(true);
+      console.log("This user has a membership NFT🌟");
+    } else{
+      console.log("😭😭This user doesn't have a membership NFT");
+    }
+  }catch(error){
+    setUserHasNFT(false)
+    console.log("Failed to get balance",error)
+  }
+}
+checkBalance();
+
+}, [address, editionDrop]);
 
   // if the user has not connected their wallet
   if(!address){
