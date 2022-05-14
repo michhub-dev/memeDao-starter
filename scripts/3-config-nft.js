@@ -2,7 +2,7 @@ import sdk from "./1-initialize-sdk.js";
 import { readFileSync } from "fs";
 import { Script } from "vm";
 
-const editionDrop = sdk.getEditionDrop("editionDropInfo address");
+const editionDrop = sdk.getEditionDrop("0xBFb3f589f249C7e09495774177Df16d13B438814");
 
 (async () => {
     try{
@@ -10,7 +10,7 @@ const editionDrop = sdk.getEditionDrop("editionDropInfo address");
             {
                 name: "Community Dao",
                 description: "This NFT is for meme Dao community",
-                image: readFileSync(Scripts/assets/images2.jpg),
+                image: readFileSync("scripts/assets/images2.jpg"),
 
             }
             

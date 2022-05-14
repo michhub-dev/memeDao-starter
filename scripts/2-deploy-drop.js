@@ -13,9 +13,11 @@ import { readFileSync } from "fs";
         });
 
         ///initialize the contract on the thirdweb sdk
-        const editionDrop = await getEditionDrop(editionDropInfo); 
+        const editionDrop = sdk.getEditionDrop(editionDropInfo);
+         //const editionDrop = sdk.getEditionDrop(editionDropInfo); 
         // get the metadata of the data 
         const metadata = await editionDrop.metadata.get();
+      //  const metadata = await editionDrop.metadata.get();
         
         console.log("successfully deployed editionDrop contract, address:",editionDropInfo,);
         console.log(" EditionDrop metadata", metadata);
