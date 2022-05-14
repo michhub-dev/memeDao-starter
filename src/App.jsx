@@ -30,20 +30,23 @@ const checkBalance = async () => {
       setUserHasNFT(true);
       console.log("This user has a membership NFT🌟");
     } else{
+      setUserHasNFT(false);
       console.log("😭😭This user doesn't have a membership NFT");
     }
   }catch(error){
     setUserHasNFT(false)
-    console.log("Failed to get balance",error)
+    console.error("Failed to get balance",error);
   }
-}
+};
 checkBalance();
 
 }, [address, editionDrop]);
 
+//mint the NFT 
 const mintNft = async () => {
   try{
     setIsMinting(true);
+    //only mint one membership NFT to the user's wallet 
     await editionDrop.claim("0", 1);
     console.log(`Successfully minted an NFT view it on Opensea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`);
     setUserHasNFT(true);
@@ -51,7 +54,7 @@ const mintNft = async () => {
     setUserHasNFT(false);
     console.error("Failed to mint NFT", error);
   } finally{
-     setIsMinting(false);
+     setIsMinting(false);// to stop the loading state
   };
 };
 
@@ -65,21 +68,21 @@ const mintNft = async () => {
     );
   }
  //render mint NFT screen 
- return(
+ return (
    <div className="mint-nft">
      <h1>Mint your free meme Dao🍪 NFT </h1>
      <button disabled={isMinting} onClick={mintNft}> {isMinting ? "Minting..." : "Mint your free NFT"}</button>
    </div>
- )
-
+ );
+ }
   //if the user's wallet is already connected 
-  return (
+  /*return (
     <div className="landing">
       <h1>Hey!👋 Meme DAO👽</h1>
       <p>Wallet connected!</p>
     </div>
   );
-};
+};*/
 
 
 export default App;
