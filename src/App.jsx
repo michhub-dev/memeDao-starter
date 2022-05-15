@@ -23,19 +23,19 @@ const App = () => {
   
 
 const checkBalance = async () => {
-  try{
+  try {
     //check if the user has our NFT 
     const balance = await editionDrop.balanceOf(address, 0);
-    if(balance.gt(0)){
+    if (balance.gt(0)) {
       setUserHasNFT(true);
       console.log("This user has a membership NFT🌟");
-    } else{
+    } else {
       setUserHasNFT(false);
       console.log("😭😭This user doesn't have a membership NFT");
     }
-  }catch(error){
-    setUserHasNFT(false)
-    console.error("Failed to get balance",error);
+  } catch (error) {
+    setUserHasNFT(false);
+    console.error("Failed to get balance", error);
   }
 };
 checkBalance();
@@ -44,34 +44,47 @@ checkBalance();
 
 //mint the NFT 
 const mintNft = async () => {
-  try{
+  try {
     setIsMinting(true);
     //only mint one membership NFT to the user's wallet 
     await editionDrop.claim("0", 1);
     console.log(`Successfully minted an NFT view it on Opensea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`);
     setUserHasNFT(true);
-  } catch(error){
+  } catch (error) {
     setUserHasNFT(false);
     console.error("Failed to mint NFT", error);
-  } finally{
+  } finally {
      setIsMinting(false);// to stop the loading state
-  };
+  }
 };
 
   // if the user has not connected their wallet
-  if(!address){
+  if (!address) {
     return (
       <div className="landing">
         <h1>Hey memer! Welcome to Meme Dao👋 </h1>
-        <button onClick={connectWithMetamask} className="btn-hero">Connect wallet</button>
+        <button onClick={connectWithMetamask} 
+        className="btn-hero">Connect wallet
+        </button>
       </div>
     );
   }
+  //if a user has the membership NFT, view dashboard 
+  if (userHasNFT) {
+    return (
+      <div className="member-page">
+        <h1>🍪Dao member page</h1>
+        <p>Congratulations on being a member of the Meme Dao community!</p>
+      </div>
+    );
+  };
  //render mint NFT screen 
  return (
    <div className="mint-nft">
      <h1>Mint your free meme Dao🍪 NFT </h1>
-     <button disabled={isMinting} onClick={mintNft}> {isMinting ? "Minting..." : "Mint your free NFT"}</button>
+     <button disabled={isMinting} onClick={mintNft}> 
+     {isMinting ? "Minting..." : "Mint your free NFT"}
+     </button>
    </div>
  );
  }
