@@ -14,13 +14,13 @@ const token = await sdk.getToken("0x218D3686d4d45E5ecAaAb8b451a1cF13A93329Ec");
           console.log("No NFT has been claimed yet, get your friends to claim your NFT");
           process.exit(0);
       }
-     ///loop through the array of addresses 
+     ///loop through the array of addresses & pick a random amount of token to airdrop to each user
       const airDropAddress = await membersAddress.map(address => {
           //pick a random number from 1000 to 100000
          const randomAmount = Math.floor(Math.random() * (10000 - 1000 + 1) + 1000);
          console.log("airdropping ", randomAmount, "with", address, "address"); 
 
-         //Airdrop target
+         //store the data. Airdrop target
          const airdropTarget = {
              toAddress: address,
              amount: randomAmount,
@@ -29,6 +29,8 @@ const token = await sdk.getToken("0x218D3686d4d45E5ecAaAb8b451a1cF13A93329Ec");
       });
 
       console.log("🌈 Started airdropping...");
+
+      //this will loop through all the targets and send the token
       await token.transferBatch(airDropAddress);
       console.log("✅ Successfully airdropped token to all the holders of the NFT");
 
