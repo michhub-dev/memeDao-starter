@@ -32,6 +32,7 @@ const App = () => {
 
     const grabAllAddresses = async () => {
       try {
+        // get all the addresses of members who hold an NFT from our ERC-1155 contract 
         const isMembersAddress = await editionDrop.history.getAllClaimerAddresses(0);
         setIsMembersAddress(isMembersAddress);
         console.log("Members addresses..", isMembersAddress);
@@ -50,6 +51,7 @@ const App = () => {
 
     const grabAllBalances = async () =>{
       try {
+        // get the token balances of everyone who holds our token on the ERC-20 contract  
         const getALLAmount = await token.history.getAllHolderBalances();
         setIsMembersAmount(getALLAmount);
         console.log("Amount..", getALLAmount); 
@@ -59,6 +61,20 @@ const App = () => {
     }
     grabAllBalances();
   },[userHasNFT, editionDrop.history]);
+
+  //combine memberAddress and memberAmount into single array
+  const holdersList = useMemo(() => {
+    return isMembersAddress.map((address) =>{
+      /// checking if there is address in the isMembersAmount array.
+    // If yes,  return the amount of token the user has.
+    // Otherwise, return 0.
+     const member = isMembersAmount?.find(({ holder }) => holder === address );
+     return {
+       address,
+       tokenAmount: member?.balance.displayValue || "0",
+     }
+    });
+  }, [isMembersAddress, isMembersAmount]);
 
   useEffect(() => {
      //if no connected wallet, exit
