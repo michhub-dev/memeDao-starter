@@ -42,7 +42,23 @@ const App = () => {
     grabAllAddresses();
   }, [userHasNFT, editionDrop.history]);
 
- 
+  ///grabs the # of token each member holds 
+  useEffect(() =>{
+    if(!userHasNFT){
+      return;
+    }
+
+    const grabAllBalances = async () =>{
+      try {
+        const getALLAmount = await token.history.getAllHolderBalances();
+        setIsMembersAmount(getALLAmount);
+        console.log("Amount..", getALLAmount); 
+      } catch (error) {
+        console.log("Failed to get token amount", error); 
+      }
+    }
+    grabAllBalances();
+  },[userHasNFT, editionDrop.history]);
 
   useEffect(() => {
      //if no connected wallet, exit
