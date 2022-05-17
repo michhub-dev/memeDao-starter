@@ -1,5 +1,5 @@
-import { useAddress, useMetamask, useEditionDrop } from '@thirdweb-dev/react';
-import { useState, useEffect } from 'react';
+import { useAddress, useMetamask, useEditionDrop, useToken } from '@thirdweb-dev/react';
+import { useState, useEffect, useMemo } from 'react';
 
 
 const App = () => {
@@ -8,12 +8,41 @@ const App = () => {
   const connectWithMetamask = useMetamask();
   console.log("Address..", address);
 
-  //initialize the editionDrop contract 
+  //initialize the editionDrop contract ERC-1155
   const editionDrop = useEditionDrop("0xBFb3f589f249C7e09495774177Df16d13B438814");
+  const token = useToken("0x218D3686d4d45E5ecAaAb8b451a1cF13A93329Ec");
   // state variable to know if user have our NFT 
   const [ userHasNFT, setUserHasNFT ] = useState(false);
   //keeps a loading state while NFT is minting  
   const [ isMinting, setIsMinting ] = useState(false); 
+  // holds the amount of token each member has in state
+  const [ isMembersAmount, setIsMembersAmount ] = useState([]);
+  // holds all members addresses 
+  const [ isMembersAddress, setIsMembersAddress ] = useState([]); 
+
+  //a fancy function to shorten users wallet address
+  const shortenAddress = (str) => {
+     return str.substring(0, 6) + "..." + str.substring(str.length - 4);
+  };
+  //grab all the addresses of all our NFT holders 
+  useEffect(() => {
+    if (!userHasNFT){
+      return;
+    }
+
+    const grabAllAddresses = async () => {
+      try {
+        const isMembersAddress = await editionDrop.history.getAllClaimerAddresses(0);
+        setIsMembersAddress(isMembersAddress);
+        console.log("Members addresses..", isMembersAddress);
+      } catch (error) {
+        console.log("Failed to get members list", error);
+      }
+    };
+    grabAllAddresses();
+  }, [userHasNFT, editionDrop.history]);
+
+ 
 
   useEffect(() => {
      //if no connected wallet, exit
