@@ -17,6 +17,22 @@ const token =  sdk.getToken("0x218D3686d4d45E5ecAaAb8b451a1cF13A93329Ec");
         process.exit(1);
     }
     try {
-        
+        //grab wallet balance. Cos this wallet basically has the entire supply now
+        const grabOwnWalletBalance = await token.balanceOf(
+         process.env.WALLET_ADDRESS
+        );
+
+        //grab 85% of the supply that we hold 
+       const supplyValue = grabOwnWalletBalance.displayValue;
+       const supplyPercent = Number(supplyValue) / 100 * 85;
+
+       //transfer 85% of the supply to voting contract 
+       await token.transfer(
+           vote.getAddress(),
+           supplyPercent
+       );
+       console.log("Successfully transfered", supplyPercent, "to vote contract" );
+    } catch (err) {
+        console.error("Failed to transfer token", err);
     }
-})
+})();
