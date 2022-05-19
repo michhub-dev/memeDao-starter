@@ -1,3 +1,9 @@
+## **View the deployed contracts** [Voting contract](https://rinkeby.etherscan.io/address/0x8480CC2FA8233c574f228ba5a78F799dcfC5CA6B#internaltx), [ERC-20 Token](https://rinkeby.etherscan.io/token/0x218d3686d4d45e5ecaaab8b451a1cf13a93329ec), [NFT Contract](https://rinkeby.etherscan.io/address/0xBFb3f589f249C7e09495774177Df16d13B438814)
+**View NFT Asset on the [Opensea testnet](https://testnets.opensea.io/assets/rinkeby/0xBFb3f589f249C7e09495774177Df16d13B438814/0)**
+
+**View Meme DAO from the Web app [Meme DAO](https://t.co/vLvolysEZV)**
+
+
 # buildspace x thirdweb - Build your own DAO with just Javascript
 
 ### **Welcome 👋**
