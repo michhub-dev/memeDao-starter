@@ -1,7 +1,7 @@
 import sdk from "./1-initialize-sdk.js";
 import { ethers } from "ethers";
-import { Description } from "@ethersproject/properties";
-import { getAddress } from "ethers/lib/utils";
+//import { Description } from "@ethersproject/properties";
+//import { getAddress } from "ethers/lib/utils";
 
 //Let users vote on proposal
 
@@ -47,7 +47,7 @@ const token = sdk.getToken("0x218D3686d4d45E5ecAaAb8b451a1cF13A93329Ec");
                     //a transfer from the treasury to my wallet
                     "transfer",
                     [
-                        process.env.WALLET_ADDRESS(),
+                        process.env.WALLET_ADDRESS,
                         ethers.utils.parseUnits(amount.toString(), 18),
                     ]
                 ),
