@@ -29,5 +29,35 @@ const token = sdk.getToken("0x218D3686d4d45E5ecAaAb8b451a1cF13A93329Ec");
                 ),
             }
         ];
+        await vote.propose(description, executions);
+        console.log("Successfully created proposal to mint token");
+    } catch (err) {
+        console.error("Failed to create first proposal", err);
+        process.exit(1);
     }
-})
+
+    try {
+        /// transfering 5,200 token to myself for being awesome
+        const amount = 5_200;
+        const description = "Should the DAO transfer" + amount + " token from the treasury into my" + process.env.WALLET.ADDRESS + "wallet for being awesome?";
+        const executions = [
+            {
+                nativeTokenValue: 0,
+                transactionData: token.encoder.encode(
+                    //a transfer from the treasury to my wallet
+                    "transfer",
+                    [
+                        process.env.WALLET_ADDRESS(),
+                        ethers.utils.parseUnits(amount.toString(), 18),
+                    ]
+                ),
+                toAddress: token.getAddress(),
+            },
+        ];
+         await vote.propose(description, executions);
+
+         console.log("Successfully created a proposal to reward myself from the treasury, hopefully people vote for it");
+    } catch (error) {
+        console.error("Failed to create the second proposal", error);
+    }
+})();
