@@ -1,10 +1,12 @@
-import { useAddress, useMetamask, useEditionDrop, useToken, useVote } from '@thirdweb-dev/react';
+import { useAddress, useMetamask, useEditionDrop, useToken, useVote, useNetwork  } from '@thirdweb-dev/react';
 import { useState, useEffect, useMemo } from 'react';
 import { AddressZero } from "@ethersproject/constants";
+import { ChainId } from '@thirdweb-dev/sdk'
 
 const App = () => {
   // Hook from thirdweb
   const address = useAddress();
+  const network = useNetwork();
   const connectWithMetamask = useMetamask();
   console.log("Address..", address);
 
@@ -182,6 +184,17 @@ const mintNft = async () => {
      setIsMinting(false);// to stop the loading state
   }
 };
+
+if (address && (network?.[0].data.chain.id !== ChainId.Rinkeby)) {
+  return (
+    <div className="unsupported-network">
+      <h2>Please connect to Rinkeby</h2>
+      <p>This Dapp only works on the Rinkeby network, Please 
+        switch networks in your connected wallet
+      </p>
+    </div>
+  )
+}
 
   // if the user has not connected their wallet
   if (!address) {
